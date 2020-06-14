@@ -29,7 +29,7 @@ public class WorldPanel extends JPanel implements MouseListener, ActionListener 
 		this.cellsPerRow = cpr;
 	
 		//2. Calculate the cell size.
-		cells.size();
+		cellsSize = ;
 		//3. Initialize the cell array to the appropriate size.
 		
 		//3. Iterate through the array and initialize each cell.
@@ -81,7 +81,7 @@ public class WorldPanel extends JPanel implements MouseListener, ActionListener 
 		int[][] livingNeighbors = new int[cellsPerRow][cellsPerRow];
 		
 		//8. check if each cell should live or die
-	
+		
 		
 		
 		
