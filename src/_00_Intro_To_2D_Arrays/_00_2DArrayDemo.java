@@ -18,7 +18,7 @@ public class _00_2DArrayDemo {
 		// integer array containing 5 integers. 
 		
 		// Accessing elements of the 2D array works the same as a 1D array
-		anotherArray2d[0][1] = 4;
+		anotherArray2d [0][1] = 4;
 		System.out.println(anotherArray2d[0][1]);
 		
 		

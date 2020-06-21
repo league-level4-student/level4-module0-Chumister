@@ -58,25 +58,11 @@ public class Cell implements Drawable{
 	@Override
 	public void draw(Graphics g) {
 		if (isAlive == false) {
-			
-			for (int i = 0; i < x; i++) {
-				System.out.println("*");
-			}
-			System.out.println();
-			for (int i = 0; i < y-2; i++) {
-				System.out.println("*");
-				for (int j = 0; j < x-2; j++) {
-					System.out.println(" ");
-				}
-				System.out.println("*");
-				System.out.println();
-			}
-			for (int i = 0; i < y; i++) {
-				System.out.println("*");
-			}
+			g.clearRect(x, y, 10, 10);
 		}
 		else {
-			
+			g.drawRect(x, y, 10, 10);
+			g.setColor(Color.BLUE);
 		}
 		
 		

@@ -64,8 +64,13 @@ public class GridPanel extends JPanel{
 		//4. Iterate through the array.
 		//   For every pixel in the list, fill in a rectangle using the pixel's color.
 		//   Then, use drawRect to add a grid pattern to your display.
-		if (rect =g) {
-			
+		for (int i = 0; i < pixels.length; i++) {
+			for (int j = 0; j < pixels[0].length; j++) {
+				g.setColor(pixels[i][j].color);
+				g.fillRect(i*pixelWidth, j*pixelHeight, pixelWidth, pixelHeight);
+				
+			}
 		}
+		
 	}
 }
