@@ -14,6 +14,7 @@ import javax.swing.Timer;
 public class WorldPanel extends JPanel implements MouseListener, ActionListener {
 	private static final long serialVersionUID = 1L;
 	private int cellsPerRow;
+	private int cellsPerColumn;
 	private int cellSize;
 	
 	private Timer timer;
@@ -21,7 +22,6 @@ public class WorldPanel extends JPanel implements MouseListener, ActionListener 
 	//1. Create a 2D array of Cells. Do not initialize it.
 
 	Cell[][] cells;
-	int livingCells;
 
 	public WorldPanel(int w, int h, int cpr) {
 		setPreferredSize(new Dimension(w, h));
@@ -32,21 +32,20 @@ public class WorldPanel extends JPanel implements MouseListener, ActionListener 
 		//2. Calculate the cell size.
 		cellSize = h/cpr;
 		//3. Initialize the cell array to the appropriate size.
-		for(int i = 0; i < cpr; i++) {
-			for(int j = 0; j < cpr; j++) {
-				cells = new Cell[cpr][cpr];
-		}
-			System.out.println(); 
-		};
+		cells = new Cell[cpr][cpr];
+		
 		//3. Iterate through the array and initialize each cell.
 		//   Don't forget to consider the cell's dimensions when 
 		//   passing in the location.
+		
 		for(int i = 0; i < cells.length; i++) {
+			
 			for(int j = 0; j < cells[0].length; j++) {
-				System.out.print(cells[i][j]); 
+				cells[i][j] = new Cell(i, j, cellSize); 
 			}
-			System.out.println(); 
-		};
+			
+		}
+		
 	}
 	
 	public void randomizeCells() {
@@ -65,7 +64,7 @@ public class WorldPanel extends JPanel implements MouseListener, ActionListener 
 		//5. Iterate through the cells and set them all to dead.
 		for (int i = 0; i < cells.length; i++) {
 			for (int j = 0; j < cells.length; j++) {
-				cells[i][j].isAlive = new Random().doubles() != null;		
+				cells[i][j].isAlive = false;		
 			}
 		}
 		repaint();
@@ -97,15 +96,15 @@ public class WorldPanel extends JPanel implements MouseListener, ActionListener 
 		g.setColor(Color.BLACK);
 		g.drawRect(0, 0, getWidth() - 1, getHeight() - 1);
 	} 
-	
 	//advances world one step
 	public void step() {
 		//7. iterate through cells and fill in the livingNeighbors array
 		// . using the getLivingNeighbors method.
+		
 		int[][] livingNeighbors = new int[cellsPerRow][cellsPerRow];
 		for (int i = 0; i < livingNeighbors.length; i++) {
 			for (int j = 0; j < livingNeighbors.length; j++) {
-				livingNeighbors[i][j] = getLivingNeighbors(i,j);
+				getLivingNeighbors(i,j);
 			}
 		}
 		//8. check if each cell should live or die
@@ -126,32 +125,34 @@ public class WorldPanel extends JPanel implements MouseListener, ActionListener 
 	//   living neighbors there are of the 
 	//   cell identified by x and y
 	public int getLivingNeighbors(int x, int y){
+		int livingCells = 0;
+
 		if (x>0 && y>0 && cells[x-1][y-1].isAlive) {
 			livingCells++;
 		}
 		if (y>0 && cells[x][y-1].isAlive) {
 			livingCells++;
 		}
-		if (x+1<0 && y>0 && cells[x+1][y-1].isAlive) {
+		if (x+1<49 && y>0 && cells[x+1][y-1].isAlive) {
 			livingCells++;
 		}
 		if (x>0 && cells[x-1][y].isAlive) {
 			livingCells++;
 		}
-		if (x>0 && cells[x+1][y].isAlive) {
+		if (x<49 && cells[x+1][y].isAlive) {
 			livingCells++;
 		}
 		if (x>0 && y+1<0 && cells[x-1][y+1].isAlive) {
 			livingCells++;
 		}
-		if (y+1<0 && cells[x][y+1].isAlive) {
+		if (y+1<49 && cells[x][y+1].isAlive) {
 			livingCells++;
 		}
-		if (x+1<0 && y+1<0 && cells[x+1][y+1].isAlive) {
+		if (x+1<49 && y+1<0 && cells[x+1][y+1].isAlive) {
 			livingCells++;
 		}
 		
-		return 0;
+		return livingCells;
 	}
 
 	@Override
@@ -176,9 +177,18 @@ public class WorldPanel extends JPanel implements MouseListener, ActionListener 
 		//10. Use e.getX() and e.getY() to determine
 		//    which cell is clicked. Then toggle
 		//    the isAlive variable for that cell.
-		int i = e.getX();
-		int j = e.getY();
-		cells[i][j].isAlive = true;
+		Dimension click = new Dimension(e.getX(),e.getY());
+		int i = e.getX()/cellSize;
+		int j = e.getY()/cellSize;
+		cells[i][j].isAlive = !cells[i][j].isAlive;
+
+		if (cells[i][j].isAlive == true) {
+			cells[i][j].isAlive = false;
+		}
+		if (cells[i][j].isAlive == false) {
+			cells[i][j].isAlive = true;
+		}
+		
 		
 		repaint();
 	}

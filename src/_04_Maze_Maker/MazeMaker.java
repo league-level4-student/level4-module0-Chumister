@@ -17,23 +17,24 @@ public class MazeMaker{
 	
 	
 	public static Maze generateMaze(int w, int h){
-		width = w;
+		width = w; 
 		height = h;
 		maze = new Maze(width, height);
 		
 		//4. select a random cell to start
-		
+		int mazeX = randGen.nextInt(maze.getHeight());
+		int mazeY = randGen.nextInt(maze.getWidth());
 		
 		//5. call selectNextPath method with the randomly selected cell
-		
-		
+		selectNextPath(maze.getCell(mazeX, mazeY));
 		return maze;
 	}
 
 	//6. Complete the selectNextPathMethod
 	private static void selectNextPath(Cell currentCell) {
 		//A. mark cell as visited
-
+		currentCell.hasBeenVisited();
+		
 		//B. Get an ArrayList of unvisited neighbors using the current cell and the method below
 		
 		//C. if has unvisited neighbors,
