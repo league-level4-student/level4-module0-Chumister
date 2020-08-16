@@ -32,14 +32,14 @@ public class Cell implements Drawable{
 		if (numNeighbors<2) {
 			isAlive = false;
 		}
-		if (numNeighbors>2 && numNeighbors<3) {
-			isAlive = true;
-		}
-		if (numNeighbors>3) {
+		//else if (numNeighbors>2 && numNeighbors<3) {
+			//isAlive = true;
+		//}
+		else if (numNeighbors>3) {
 			isAlive = false;
 			
 		}
-		if (numNeighbors==3) {
+		else if (numNeighbors==3) {
 			isAlive = true;
 		}
 	}
@@ -61,7 +61,7 @@ public class Cell implements Drawable{
 			g.clearRect(x, y, 10, 10);
 		}
 		else {
-			g.drawRect(x, y, 10, 10);
+			g.drawRect(getX(), getY(), 10, 10);
 			g.setColor(Color.BLUE);
 		}
 		

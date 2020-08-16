@@ -110,8 +110,7 @@ public class WorldPanel extends JPanel implements MouseListener, ActionListener 
 		//8. check if each cell should live or die
 		for (int i = 0; i < livingNeighbors.length; i++) {
 			for (int j = 0; j < livingNeighbors.length; j++) {
-				cells[i][j].liveOrDie(livingNeighbors[i][j]);		
-				
+					cells[i][j].liveOrDie((livingNeighbors[i][j]));;		
 			}
 		}
 		
@@ -127,32 +126,36 @@ public class WorldPanel extends JPanel implements MouseListener, ActionListener 
 	public int getLivingNeighbors(int x, int y){
 		int livingCells = 0;
 
-		if (x>0 && y>0 && cells[x-1][y-1].isAlive) {
-			livingCells++;
-		}
-		if (y>0 && cells[x][y-1].isAlive) {
-			livingCells++;
-		}
-		if (x+1<49 && y>0 && cells[x+1][y-1].isAlive) {
-			livingCells++;
-		}
-		if (x>0 && cells[x-1][y].isAlive) {
-			livingCells++;
-		}
-		if (x<49 && cells[x+1][y].isAlive) {
-			livingCells++;
-		}
-		if (x>0 && y+1<0 && cells[x-1][y+1].isAlive) {
-			livingCells++;
-		}
-		if (y+1<49 && cells[x][y+1].isAlive) {
-			livingCells++;
-		}
-		if (x+1<49 && y+1<0 && cells[x+1][y+1].isAlive) {
-			livingCells++;
-		}
+		if (x > 0 && y>0 && x<WIDTH && y<HEIGHT) {
+			
 		
+		if (cells[x-1][y-1].isAlive) {
+			livingCells++;
+		}
+		if (cells[x][y-1].isAlive) {
+			livingCells++;
+		}
+		if (cells[x+1][y-1].isAlive) {
+			livingCells++;
+		}
+		if (cells[x-1][y].isAlive) {
+			livingCells++;
+		}
+		if (cells[x+1][y].isAlive) {
+			livingCells++;
+		}
+		if (cells[x-1][y+1].isAlive) {
+			livingCells++;
+		}
+		if (cells[x][y+1].isAlive) {
+			livingCells++;
+		}
+		if (cells[x+1][y+1].isAlive) {
+			livingCells++;
+		}
+		}
 		return livingCells;
+		
 	}
 
 	@Override
@@ -180,15 +183,8 @@ public class WorldPanel extends JPanel implements MouseListener, ActionListener 
 		Dimension click = new Dimension(e.getX(),e.getY());
 		int i = e.getX()/cellSize;
 		int j = e.getY()/cellSize;
-		cells[i][j].isAlive = !cells[i][j].isAlive;
-
-		if (cells[i][j].isAlive == true) {
-			cells[i][j].isAlive = false;
-		}
-		if (cells[i][j].isAlive == false) {
-			cells[i][j].isAlive = true;
-		}
-		
+		cells[i][j].isAlive = true;
+	
 		
 		repaint();
 	}
