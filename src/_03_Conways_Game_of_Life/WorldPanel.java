@@ -41,7 +41,7 @@ public class WorldPanel extends JPanel implements MouseListener, ActionListener 
 		for(int i = 0; i < cells.length; i++) {
 			
 			for(int j = 0; j < cells[0].length; j++) {
-				cells[i][j] = new Cell(i, j, cellSize); 
+				cells[i][j] = new Cell(i*cellSize, j*cellSize, cellSize); 
 			}
 			
 		}
@@ -103,14 +103,14 @@ public class WorldPanel extends JPanel implements MouseListener, ActionListener 
 		
 		int[][] livingNeighbors = new int[cellsPerRow][cellsPerRow];
 		for (int i = 0; i < livingNeighbors.length; i++) {
-			for (int j = 0; j < livingNeighbors.length; j++) {
-				getLivingNeighbors(i,j);
+			for (int j = 0; j < livingNeighbors[0].length; j++) {
+				livingNeighbors[i][j] = getLivingNeighbors(i,j);
 			}
 		}
 		//8. check if each cell should live or die
 		for (int i = 0; i < livingNeighbors.length; i++) {
 			for (int j = 0; j < livingNeighbors.length; j++) {
-					cells[i][j].liveOrDie((livingNeighbors[i][j]));;		
+					cells[i][j].liveOrDie(livingNeighbors[i][j]);		
 			}
 		}
 		
@@ -126,34 +126,49 @@ public class WorldPanel extends JPanel implements MouseListener, ActionListener 
 	public int getLivingNeighbors(int x, int y){
 		int livingCells = 0;
 
-		if (x > 0 && y>0 && x<WIDTH && y<HEIGHT) {
-			
+		if (x > 0 && y > 0) {
 		
-		if (cells[x-1][y-1].isAlive) {
-			livingCells++;
+			if (cells[x-1][y-1].isAlive) {
+				livingCells++;
+			}
 		}
-		if (cells[x][y-1].isAlive) {
-			livingCells++;
+		if (y > 0) {
+			if (cells[x][y-1].isAlive) {
+				livingCells++;
+			}
 		}
-		if (cells[x+1][y-1].isAlive) {
-			livingCells++;
+		if (x<49 && y>0) {
+			if (cells[x+1][y-1].isAlive) {
+				livingCells++;
+			}	
 		}
-		if (cells[x-1][y].isAlive) {
-			livingCells++;
+		if (x>0) {
+			if (cells[x-1][y].isAlive) {
+				livingCells++;
+			}
 		}
-		if (cells[x+1][y].isAlive) {
-			livingCells++;
+		if (x<49) {
+			if (cells[x+1][y].isAlive) {
+				livingCells++;
+			}
 		}
-		if (cells[x-1][y+1].isAlive) {
-			livingCells++;
+		if (x>0 && y<49) {
+			if (cells[x-1][y+1].isAlive) {
+				livingCells++;
+			}	
 		}
-		if (cells[x][y+1].isAlive) {
-			livingCells++;
+		if (y<49) {
+			if (cells[x][y+1].isAlive) {
+				livingCells++;
+			}
 		}
-		if (cells[x+1][y+1].isAlive) {
-			livingCells++;
+		if (x<49 && y<49) {
+			if (cells[x+1][y+1].isAlive) {
+				livingCells++;
+			
+			}
 		}
-		}
+		
 		return livingCells;
 		
 	}
