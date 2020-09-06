@@ -47,7 +47,7 @@ public class MazeMaker{
 			selectNextPath(maze.getCell(n, 0));
 		}
 			//C1. select one at random.
-			
+		
 			//C2. push it to the stack
 		
 			//C3. remove the wall between the two cells
@@ -82,7 +82,14 @@ public class MazeMaker{
 	//   If they are, the walls between them are removed.
 	private static void removeWalls(Cell c1, Cell c2) {
 		if (c1 == c2) {
-			
+			c1.setEastWall(false);
+			c1.setNorthWall(false);
+			c1.setWestWall(false);
+			c1.setSouthWall(false);
+			c2.setWestWall(false);
+			c2.setSouthWall(false);
+			c2.setEastWall(false);
+			c2.setNorthWall(false);
 		}
 	}
 	
@@ -90,6 +97,8 @@ public class MazeMaker{
 	//   Any unvisited neighbor of the passed in cell gets added
 	//   to the ArrayList
 	private static ArrayList<Cell> getUnvisitedNeighbors(Cell c) {
+		
 		return null;
+		
 	}
 }
