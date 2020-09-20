@@ -105,15 +105,15 @@ public class MazeMaker{
 		ArrayList <Cell> unvisited = new ArrayList<Cell>();
 		if (c.getX()>0 && !maze.cells[c.getX()-1][c.getY()].hasBeenVisited()) {
 			unvisited.add(maze.cells[c.getX()-1][c.getY()]);
-			
-		}else {
-			unvisited.add(maze.cells[c.getX()][c.getY()-1]);
 		}
-		if (c.getX()<maze.getWidth() && !maze.cells[c.getX()+1][c.getY()].hasBeenVisited()) {
+		if(c.getX()<width-1 && ! maze.cells[c.getX()+1][c.getY()].hasBeenVisited()){
 			unvisited.add(maze.cells[c.getX()+1][c.getY()]);
-
-		}else {
+		}
+		if (c.getY()<maze.getHeight() && !maze.cells[c.getX()][c.getY()+1].hasBeenVisited()) {
 			unvisited.add(maze.cells[c.getX()][c.getY()+1]);
+		}
+		if(c.getY()>0 && !maze.cells[c.getX()][c.getY()-1].hasBeenVisited()){
+			unvisited.add(maze.cells[c.getX()][c.getY()-1]);
 		}
 		
 		return unvisited;
