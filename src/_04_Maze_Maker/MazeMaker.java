@@ -81,15 +81,20 @@ public class MazeMaker{
 	//   This method will check if c1 and c2 are adjacent.
 	//   If they are, the walls between them are removed.
 	private static void removeWalls(Cell c1, Cell c2) {
-		if (c1 == c2) {
-			c1.setEastWall(false);
-			c1.setNorthWall(false);
-			c1.setWestWall(false);
+		if (c1.getX() == c2.getX() && c1.getY() < c2.getY()) {			
 			c1.setSouthWall(false);
-			c2.setWestWall(false);
-			c2.setSouthWall(false);
-			c2.setEastWall(false);
 			c2.setNorthWall(false);
+		}else {
+			c1.setNorthWall(false);
+			c2.setSouthWall(false);
+		}
+		if (c1.getX() > c2.getX() && c1.getY() == c2.getY()) {
+			c1.setEastWall(false);
+			c2.setWestWall(false);
+			
+		}else {
+			c1.setWestWall(false);
+			c2.setEastWall(false);
 		}
 	}
 	
@@ -97,8 +102,22 @@ public class MazeMaker{
 	//   Any unvisited neighbor of the passed in cell gets added
 	//   to the ArrayList
 	private static ArrayList<Cell> getUnvisitedNeighbors(Cell c) {
+		ArrayList <Cell> unvisited = new ArrayList<Cell>();
+		if (c.getX()>0 && !maze.cells[c.getX()-1][c.getY()].hasBeenVisited()) {
+			unvisited.add(maze.cells[c.getX()-1][c.getY()]);
+			
+		}else {
+			unvisited.add(maze.cells[c.getX()][c.getY()-1]);
+		}
+		if (c.getX()<maze.getWidth() && !maze.cells[c.getX()+1][c.getY()].hasBeenVisited()) {
+			unvisited.add(maze.cells[c.getX()+1][c.getY()]);
+
+		}else {
+			unvisited.add(maze.cells[c.getX()][c.getY()+1]);
+		}
 		
-		return null;
+		return unvisited;
+		
 		
 	}
 }
