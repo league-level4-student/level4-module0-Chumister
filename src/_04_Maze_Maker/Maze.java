@@ -12,12 +12,8 @@ public class Maze {
 		this.height = h;
 
 		//2. Initialize the cells using the width and height varibles
-		for (w = 0; w < cells.length; w++) {
-			for (h = 0; h < cells[0].length; h++) {
-				cells[w][h] = new Cell(w,h);
-			}
-			
-		}
+		cells = new Cell[w][h];
+		
 		//3. Iterated through each cell and initialize it
 		//   using i and j as the location
 		for (int i = 0; i < cells.length; i++) {
@@ -31,7 +27,7 @@ public class Maze {
 	public void draw(Graphics g) {
 		for (int i = 0; i < cells.length; i++) {
 			for (int j = 0; j < cells.length; j++) {
-				g.drawRect(i*width, j*height, width, height);
+				cells[i][j].draw(g);
 			}
 		}
 	}
