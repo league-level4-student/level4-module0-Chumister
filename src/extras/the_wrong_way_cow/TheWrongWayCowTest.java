@@ -59,7 +59,7 @@ public class TheWrongWayCowTest {
       "E908E09850 080484844992 293983".toCharArray(),
       "0098 080 KLcowDSFLHU EWPEEJELK".toCharArray(),
       " dfhdu 880-23fjdlfkjlkjlkjfljf".toCharArray(),
-      ";d43-02- -340-2394 39-099kk;ld".toCharArray()
+      ";d43-02- -340-2394 39-099kk;ld".toCharArray(),
     };
     assertArrayEquals(new int[]{29,0}, TheWrongWayCow.findWrongWayCow(show(field)));
   }
