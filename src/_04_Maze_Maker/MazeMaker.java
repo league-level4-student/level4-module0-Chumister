@@ -88,12 +88,12 @@ public class MazeMaker{
 			c2.setSouthWall(false);
 		}
 		 if (c1.getX() > c2.getX() && c1.getY() == c2.getY()) {
-			c1.setEastWall(false);
-			c2.setWestWall(false);
-			
-		} if(c1.getX() < c2.getX() && c1.getY() == c2.getY()) {
 			c1.setWestWall(false);
 			c2.setEastWall(false);
+			
+		} if(c1.getX() < c2.getX() && c1.getY() == c2.getY()) {
+			c1.setEastWall(false);
+			c2.setWestWall(false);
 		}
 	}
 	
