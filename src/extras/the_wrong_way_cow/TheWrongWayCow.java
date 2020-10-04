@@ -63,8 +63,11 @@ public class TheWrongWayCow {
 				}
 				if (i<field.length-2 && field[i][j]=='c' && field[i][j+1]=='o'&& field[i][j+2]=='w') {
 					countup++;
+					
 				}
+				
 			}
+			
 		}
         return null;
     }
