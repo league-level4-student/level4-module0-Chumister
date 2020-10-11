@@ -55,32 +55,52 @@ public class TheWrongWayCow {
 		int[] downCoordinates = new int[2];
 		int[] upCoordinates = new int[2];
 		for (int i = 0; i < field.length; i++) {
-			for (int j = 0; j < field.length; j++) {
+			for (int j = 0; j < field[i].length; j++) {
 				if (i<field.length-2 && field[i][j]=='c' && field[i+1][j]=='o'&& field[i+2][j]=='w') {
 					countRight++;
-					rightCoordinates[0] = i;
-					rightCoordinates[1] = j;
+					rightCoordinates[1] = i;
+					rightCoordinates[0] = j;
 				}
 				if (i>1 && field[i][j]=='c' && field[i-1][j]=='o'&& field[i-2][j]=='w') {
 					countLeft++;
-					leftCoordinates[0] = i;
-					leftCoordinates[1] = j;
+					leftCoordinates[1] = i;
+					leftCoordinates[0] = j;
 				}
-				if (i>1 && field[i][j]=='c' && field[i][j-1]=='o'&& field[i][j-2]=='w') {
+				if (j>1 && field[i][j]=='c' && field[i][j-1]=='o'&& field[i][j-2]=='w') {
 					countDown++;
-					downCoordinates[1] = j;
-					downCoordinates[0] = i;
+					downCoordinates[0] = j;
+					downCoordinates[1] = i;
+					
 				}
-				if (i<field.length-2 && field[i][j]=='c' && field[i][j+1]=='o'&& field[i][j+2]=='w') {
+				if (j<field[i].length-2 && field[i][j]=='c' && field[i][j+1]=='o'&& field[i][j+2]=='w') {
 					countUp++;
-					upCoordinates[1] = j;
-					upCoordinates[0] = i;
+					upCoordinates[0] = j;
+					upCoordinates[1] = i;
 				}
 				
 			}
 			
 		}
-       return null;
+		
+		System.out.println(rightCoordinates[0]);
+		System.out.println(rightCoordinates[1]);
+		if (countRight == 1) {
+			return rightCoordinates;
+		}
+		System.out.println(leftCoordinates[0]);
+		System.out.println(leftCoordinates[1]);
+		if (countLeft == 1) {
+			return leftCoordinates;
+		}
+		System.out.println(downCoordinates[0]);
+		System.out.println(downCoordinates[1]);
+		
+		if (countDown == 1) {
+			return downCoordinates;
+		}
+		System.out.println(upCoordinates[0]);
+		System.out.println(upCoordinates[1]);
+		return upCoordinates;
        
     }
 }
